@@ -1,0 +1,3 @@
+# CTF Rules
+
+No rulez, just fun...

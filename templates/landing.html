@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Blue Sea Bootcamp</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        :root {
+            --color-bg: #0b0f19;
+            --color-primary: #1a1f2e;
+            --color-secondary: #2a3040;
+            --color-text-light: #e0e0e0;
+            --color-text-dark: #f8f9fa;
+            --color-yonko: #ff9800; /* Orange/Gold for titles */
+            --color-treasure: #ffeb3b; /* Yellow for treasure */
+        }
+        
+        body {
+            background-color: var(--color-bg);
+            color: var(--color-text-light);
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+        }
+        
+        /* Fixed Video and Particle Background */
+        .video-background-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -2; /* Placed behind all content */
+        }
+        
+        #video-bg {
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+        }
+        
+        #tsparticles {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1; /* Placed over the video */
+        }
+        
+        /* Scrolling Content Container */
+        .scrolling-content-container {
+            position: relative;
+            z-index: 1; /* Ensures this content scrolls over the background */
+            background-color: rgba(11, 15, 25, 0.7); /* Adds a transparent overlay for readability */
+        }
+
+        /* Hero Section (Full-screen) */
+        #hero-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            z-index: 2; /* Ensures the hero content is on top of everything */
+        }
+        
+        /* Content Sections */
+        .card {
+            background-color: var(--color-primary);
+            border: 1px solid var(--color-secondary);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .card-header {
+            background-color: var(--color-secondary);
+            border-bottom: none;
+            color: var(--color-yonko);
+            font-weight: bold;
+        }
+        
+        .animated-button {
+            background-color: var(--color-yonko);
+            border-color: var(--color-yonko);
+            color: var(--color-bg);
+            font-weight: 600;
+            padding: 12px 30px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .animated-button:hover {
+            background-color: #ffb74d;
+            border-color: #ffb74d;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        }
+        
+        .text-yonko {
+            color: var(--color-yonko);
+            font-weight: bold;
+        }
+        
+        .text-treasure {
+            color: var(--color-treasure);
+        }
+    </style>
+</head>
+<body>
+    <div class="video-background-fixed">
+        <video autoplay muted loop id="video-bg">
+            <source src="/static/images/153957-806571952.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div id="tsparticles"></div>
+    </div>
+    
+    <div class="scrolling-content-container">
+        <div id="hero-section">
+            <h1 class="display-1 text-uppercase text-yonko">ICTAK CAPTURE THE FLAG</h1>
+            <h3 class="display-4 text-uppercase text-yonko"></h3>
+            <p class="lead text-treasure">Embark on a voyage to master cybersecurity.</p>
+            <a href="#rules-section" class="btn btn-primary btn-lg mt-4 animated-button">
+                <i class="fas fa-scroll"></i> View Rules
+            </a>
+        </div>
+
+        <div id="rules-section" class="container py-5 my-5 rules-content">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <h2 class="text-center text-yonko display-4 mb-4">Rules of Engagement</h2>
+            <div class="card bg-ship p-4 shadow-lg rounded-3">
+                <div class="card-body">
+                    <div class="markdown-content text-light">
+
+    <h1 class="text-3xl font-bold mb-4">CTF Platform Rules</h1>
+    <p class="mb-4">Welcome to the CTF! To ensure a fun and fair experience for everyone, please take a moment to review these rules. Violating these rules may result in disqualification or a permanent ban from the platform.</p>
+
+    <!-- ICTAK Specific Rules -->
+    <h2 class="text-xl font-bold mt-6 mb-2">ICTAK CTF Specific Rules</h2>
+    <ul class="list-disc list-inside space-y-2">
+        <li>This is a CTF conducted by <strong>ICTAK</strong> — no unwanted actions should be performed.</li>
+        <li>Do not share flags under any circumstances.</li>
+        <li>Each participant receives specific flags for challenges. Sharing them can get you caught.</li>
+        <li>Only valid flags are accepted on the user submission portal for every challenge.</li>
+        <li>For <strong>Web Challenges</strong>, before beginning go to <code>port 7777</code> of every IP and enter your registered email (used during registration) before solving. This ensures correct flag validation.</li>
+        <li>Flags can be of three types: <code>ICTAK{.....}</code>, <code>CTF{.....}</code>, or <code>Flag{.....}</code>.</li>
+    </ul>
+
+    <h2 class="text-xl font-bold mt-6 mb-2">General Conduct and Fair Play</h2>
+    <ul class="list-disc list-inside space-y-2">
+        <li><strong>No Cheating:</strong> Any form of cheating, including sharing flags, collaborating outside of your registered team, or using automated tools to brute-force flags, is strictly prohibited.</li>
+        <li><strong>Respect for Infrastructure:</strong> Do not attempt to attack the platform's infrastructure, the scoring server, or other players' machines. Focus on solving the challenges provided.</li>
+        <li><strong>Sportsmanship:</strong> Be respectful to other participants and staff. Unsportsmanlike conduct will not be tolerated.</li>
+    </ul>
+
+    <h2 class="text-xl font-bold mt-6 mb-2">Scoring System</h2>
+    <ul class="list-disc list-inside space-y-2">
+        <li><strong>Dynamic Scoring:</strong> Challenges use a dynamic scoring system. The more people who solve a challenge, the less it is worth. The score will automatically adjust to reflect the number of solves.</li>
+        <li><strong>Points per Flag:</strong> Points are awarded for each unique flag submitted. A single challenge may contain multiple flags.</li>
+        <li><strong>Penalties:</strong> Using hints will result in a point deduction from your total score. The penalty amount is clearly displayed on the challenge page before you take the hint.</li>
+    </ul>
+
+    <h2 class="text-xl font-bold mt-6 mb-2">Team Rules</h2>
+    <ul class="list-disc list-inside space-y-2">
+        <li><strong>Team Creation:</strong> Any registered user can create a team. The user who creates the team becomes the team captain.</li>
+        <li><strong>Joining a Team:</strong> You can request to join an existing team from the team list. The team captain must approve your request before you become a member.</li>
+        <li><strong>One Team Only:</strong> You may only be a member of one team at a time.</li>
+        <li><strong>Leaving a Team (The Score Lock Rule):</strong>
+            <p class="mt-2">A team with a score of zero can be left by any member at any time. <strong>Once a team has scored any points, no member can leave or be removed from the team.</strong> This rule is in place to ensure fair competition and prevent the manipulation of the scoreboard by team-hopping.</p>
+        </li>
+        <li><strong>Team Captain:</strong> The team captain is responsible for managing the team, including approving or rejecting join requests. The captain can only disband the team if they are the last remaining member and the team has a score of zero.</li>
+    </ul>
+
+    <h2 class="text-xl font-bold mt-6 mb-2">Challenge Interaction</h2>
+    <ul class="list-disc list-inside space-y-2">
+        <li><strong>Hints:</strong> Hints are available for some challenges and come with a point penalty. Once a hint is taken, its content becomes visible to the entire team, and the penalty is applied to all members.</li>
+        <li><strong>Files:</strong> Challenge files are available for download only after any prerequisite challenges have been solved.</li>
+    </ul>
+
+    <h2 class="text-xl font-bold mt-6 mb-2">Flag Submission</h2>
+    <ul class="list-disc list-inside space-y-2">
+        <li><strong>Rate Limiting:</strong> To prevent brute-force attacks, there may be a rate limit on flag submissions. If you submit too many incorrect flags in a short period, you may be temporarily blocked from submitting.</li>
+        <li><strong>Flag Format:</strong> All flags must be submitted in the specified format, typically <code>ICTAK{...}</code> unless otherwise stated in the challenge description.</li>
+    </ul>
+
+    <p class="mt-4">Good luck, and have fun!</p>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        <div id="auth-section" class="container py-5 my-5 auth-content">
+            <div class="row justify-content-center">
+                <div class="col-md-10 text-center">
+                    <h2 class="text-yonko display-4 mb-4">Ready to Set Sail?</h2>
+                    <div class="d-flex justify-content-center flex-wrap gap-3">
+                        <a href="{{ url_for('login') }}" class="btn btn-lg btn-primary animated-button">
+                            <i class="fas fa-sign-in-alt"></i> Board Ship
+                        </a>
+                        <a href="{{ url_for('register') }}" class="btn btn-lg btn-secondary animated-button">
+                            <i class="fas fa-user-plus"></i> Join Crew
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+    
+    <script src="https://cdn.jsdelivr.net/npm/@tsparticles/engine@2.12.0/tsparticles.engine.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.min.js"></script>
+    <script>
+        tsParticles.load("tsparticles", {
+            "particles": {
+                "number": { "value": 150, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#ffffff" },
+                "shape": { "type": "circle", "stroke": { "width": 0, "color": "#000000" } },
+                "opacity": { "value": 0.5, "random": false, "anim": { "enable": false } },
+                "size": { "value": 2, "random": true, "anim": { "enable": false } },
+                "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.4, "width": 1 },
+                "move": { "enable": true, "speed": 1, "direction": "none", "random": true, "straight": false, "out_mode": "out", "bounce": false }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": { "onhover": { "enable": true, "mode": "repulse" }, "onclick": { "enable": true, "mode": "push" }, "resize": true },
+                "modes": { "repulse": { "distance": 200, "duration": 0.4 } }
+            },
+            "retina_detect": true
+        });
+    </script>
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>

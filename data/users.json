@@ -1,0 +1,57 @@
+[
+  {
+    "id": "aded1350-a454-491b-ad46-14f4323e5fa1",
+    "username": "admin",
+    "email": "mysticraganork66@gmail.com",
+    "password": "pbkdf2:sha256:600000$4hCnyKJQRRf3ko03$13aed22e7ad965341d5b13d208114a670f025fda94fbbc187d89d1e33373dbc0",
+    "is_admin": true,
+    "is_banned": false,
+    "is_confirmed": true,
+    "created_at": "2025-09-16T09:48:59.195825",
+    "avatar_seed": "6c39a90e-7a1a-47a1-8d8e-5cddc0f60428",
+    "bio": "",
+    "location": "",
+    "website": "",
+    "team_id": null,
+    "team_status": "none",
+    "achievements": [],
+    "pre_generated_flags": {
+      "chal1": [
+        {
+          "flag": "flag{byt3_w4s_h3r3_4ll_4l0ng_b1affcf615}",
+          "id": "63a1b210-bdfa-4e3d-aeec-763c7650cec9"
+        },
+        {
+          "flag": "flag{w3lc0m3_t0_m1dn1ght_c4f3_3fc4cdbf3b}",
+          "id": "69b64cd2-7e2a-4613-9015-018cfda4ceca"
+        },
+        {
+          "flag": "flag{th3_m3nu_h1d3s_s3cr3ts_6d0967cb21}",
+          "id": "175fb68d-9b0a-4613-ac23-46032927afcd"
+        },
+        {
+          "flag": "flag{m4n4g3r_kn0ws_th3_tr4d3_317430168a}",
+          "id": "832764c8-0b9f-4aca-86bd-3ad534c3970f"
+        }
+      ],
+      "chronos_chronicle": [
+        {
+          "flag": "CTF{T1m3_15_4_S0c14l_C0n5trvc7_e71a7c7306}",
+          "id": "0a578cdc-3d7a-49d1-9664-aa7667711051"
+        }
+      ],
+      "lovenote": [
+        {
+          "flag": "ICTAK{L0V3_15_4_S0C14L_C0NN3CT10N_a7fcb4b52d}",
+          "id": "8db384d4-f5dd-484c-9f90-9251c1132203"
+        }
+      ],
+      "lazydev": [
+        {
+          "flag": "ICTAK{0v3rZ3a10u5_1n73rn_Strik3s_4ga1n_36bde9fdb7}",
+          "id": "055727e3-5f49-435c-af75-c5941ca0b799"
+        }
+      ]
+    }
+  }
+]

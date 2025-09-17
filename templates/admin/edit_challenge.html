@@ -1,0 +1,210 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Challenge - Admin Panel{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h2><i class="fas fa-edit"></i> Edit Challenge</h2>
+        <a href="{{ url_for('admin_challenges') }}" class="btn btn-secondary mb-3">
+            <i class="fas fa-arrow-left"></i> Back to Challenges
+        </a>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Edit Challenge: <code>{{ challenge.id }}</code></h5>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('admin_challenges') }}">
+                    <input type="hidden" name="action" value="edit">
+                    <input type="hidden" name="id" value="{{ challenge.id }}">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Title</label>
+                                <input type="text" class="form-control" name="title" required value="{{ challenge.title }}">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Category</label>
+                                <select class="form-control" name="category" required>
+                                    <option value="Web" {% if challenge.category == 'Web' %}selected{% endif %}>Web</option>
+                                    <option value="Crypto" {% if challenge.category == 'Crypto' %}selected{% endif %}>Crypto</option>
+                                    <option value="Pwn" {% if challenge.category == 'Pwn' %}selected{% endif %}>Pwn</option>
+                                    <option value="Rev" {% if challenge.category == 'Rev' %}selected{% endif %}>Reverse Engineering</option>
+                                    <option value="Misc" {% if challenge.category == 'Misc' %}selected{% endif %}>Miscellaneous</option>
+                                    <option value="Forensics" {% if challenge.category == 'Forensics' %}selected{% endif %}>Forensics</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Description</label>
+                        <textarea class="form-control" name="description" rows="4" required>{{ challenge.description }}</textarea>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="mb-3">
+                                <label class="form-label">Difficulty</label>
+                                <select class="form-control" name="difficulty" required>
+                                    <option value="Easy" {% if challenge.difficulty == 'Easy' %}selected{% endif %}>Easy</option>
+                                    <option value="Medium" {% if challenge.difficulty == 'Medium' %}selected{% endif %}>Medium</option>
+                                    <option value="Hard" {% if challenge.difficulty == 'Hard' %}selected{% endif %}>Hard</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="mb-3">
+                                <label class="form-label">Base Score</label>
+                                <input type="number" class="form-control" name="base_score" required min="1" value="{{ challenge.base_score }}">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="mb-3 form-check mt-4">
+                                <input type="checkbox" class="form-check-input" name="visible" id="visible"
+                                    {% if challenge.visible %}checked{% endif %}>
+                                <label class="form-check-label" for="visible">
+                                    Visible
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Prerequisites (comma-separated IDs)</label>
+                        <input type="text" class="form-control" name="requires" value="{{ challenge.requires|join(',') }}">
+                    </div>
+
+                    <div id="flag-container">
+                        {% for flag in challenge.flags %}
+                        <div class="flag-entry mb-3 p-3 border rounded">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label class="form-label">Flag Type</label>
+                                    <select class="form-control flag-type-select" name="flag_type[]" onchange="toggleFlagInput(this)">
+                                        <option value="static" {% if flag.type == 'static' %}selected{% endif %}>Static Flag</option>
+                                        <option value="dynamic" {% if flag.type == 'dynamic' %}selected{% endif %}>Dynamic Flag</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">
+                                        {% if flag.type == 'static' %}
+                                            Flag
+                                        {% else %}
+                                            Base Flag
+                                        {% endif %}
+                                    </label>
+                                    <input type="text" class="form-control flag-value-input" name="flag_value[]" value="{{ flag.flag or flag.base_flag }}" required>
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label">&nbsp;</label>
+                                    <button type="button" class="btn btn-danger w-100 remove-flag-btn" onclick="removeFlagField(this)">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <button type="button" class="btn btn-info mb-3" onclick="addFlagField()">
+                        <i class="fas fa-plus"></i> Add Another Flag
+                    </button>
+                    <div class="mb-3">
+                        <label class="form-label">Hint 1</label>
+                        <input type="text" class="form-control" name="hint1" value="{{ challenge.hints[0] if challenge.hints|length > 0 else '' }}">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Hint 2</label>
+                        <input type="text" class="form-control" name="hint2" value="{{ challenge.hints[1] if challenge.hints|length > 1 else '' }}">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Hint 3</label>
+                        <input type="text" class="form-control" name="hint3" value="{{ challenge.hints[2] if challenge.hints|length > 2 else '' }}">
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Save Changes
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script>
+    function addFlagField() {
+        const container = document.getElementById('flag-container');
+        const newEntry = document.createElement('div');
+        newEntry.className = 'flag-entry mb-3 p-3 border rounded';
+        newEntry.innerHTML = `
+            <div class="row">
+                <div class="col-md-5">
+                    <label class="form-label">Flag Type</label>
+                    <select class="form-control flag-type-select" name="flag_type[]" onchange="toggleFlagInput(this)">
+                        <option value="static">Static Flag</option>
+                        <option value="dynamic">Dynamic Flag</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Flag</label>
+                    <input type="text" class="form-control flag-value-input" name="flag_value[]" placeholder="flag{...}" required>
+                </div>
+                <div class="col-md-1">
+                    <label class="form-label">&nbsp;</label>
+                    <button type="button" class="btn btn-danger w-100 remove-flag-btn" onclick="removeFlagField(this)">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+        `;
+        container.appendChild(newEntry);
+        updateRemoveButtons();
+    }
+
+    function removeFlagField(button) {
+        button.closest('.flag-entry').remove();
+        updateRemoveButtons();
+    }
+
+    function toggleFlagInput(selectElement) {
+        const flagType = selectElement.value;
+        const parentDiv = selectElement.closest('.flag-entry');
+        const input = parentDiv.querySelector('.flag-value-input');
+        const label = parentDiv.querySelector('.form-label');
+        if (flagType === 'static') {
+            label.textContent = 'Flag';
+            input.placeholder = 'flag{...}';
+        } else {
+            label.textContent = 'Base Flag';
+            input.placeholder = 'flag{base_part}';
+        }
+    }
+
+    function updateRemoveButtons() {
+        const removeButtons = document.querySelectorAll('.remove-flag-btn');
+        if (removeButtons.length > 1) {
+            removeButtons.forEach(btn => btn.style.display = 'block');
+        } else {
+            removeButtons.forEach(btn => btn.style.display = 'none');
+        }
+    }
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        updateRemoveButtons();
+        // Trigger change event for all pre-existing flag fields
+        document.querySelectorAll('.flag-type-select').forEach(select => {
+            select.dispatchEvent(new Event('change'));
+        });
+    });
+</script>
+{% endblock %}

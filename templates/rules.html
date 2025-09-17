@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Rules - CTF Platform{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h4><i class="fas fa-gavel"></i> Rules of Engagement</h4>
+            </div>
+            <div class="card-body">
+                <div class="markdown-content">
+
+                    <h5>ICTAK CTF Specific Rules</h5>
+                    <ul>
+                        <li>This is a CTF conducted by <strong>ICTAK</strong> — no unwanted actions should be performed.</li>
+                        <li>Do not share flags under any circumstances.</li>
+                        <li>Each participant receives specific flags for challenges. Sharing them can get you caught.</li>
+                        <li>Only valid flags are accepted on the user submission portal for every challenge.</li>
+                        <li>For <strong>Web Challenges</strong>, before beginning go to <code>port 7777</code> of every IP and enter your registered email (used during registration) before solving. This ensures correct flag validation.</li>
+                        <li>Flags can be of three types: <code>ICTAK{.....}</code>, <code>CTF{.....}</code>, or <code>Flag{.....}</code>.</li>
+                    </ul>
+
+                    <h5>General Rules</h5>
+                    <ul>
+                        <li>Respect all participants. Any form of harassment or abuse will not be tolerated.</li>
+                        <li>Do not attempt to attack the CTF platform infrastructure itself.</li>
+                        <li>Flags follow the given format unless specified otherwise.</li>
+                        <li>Sharing flags, writeups, or solutions during the competition is prohibited.</li>
+                    </ul>
+
+                    <h5>Technical Rules</h5>
+                    <ul>
+                        <li>No brute force attacks unless explicitly allowed by a challenge.</li>
+                        <li>Denial-of-Service (DoS/DDoS) attacks against the servers or other teams are forbidden.</li>
+                        <li>Automated tools (e.g., SQLmap, Hydra) may only be used if challenges explicitly permit them.</li>
+                        <li>Social engineering, phishing, or real-world attacks outside the challenge scope are not allowed.</li>
+                    </ul>
+
+                    <h5>Fair Play</h5>
+                    <ul>
+                        <li>Play honestly and solve challenges with your own skills.</li>
+                        <li>Collaboration within your team is allowed, but inter-team collaboration is not.</li>
+                        <li>Any attempt to disrupt the event will result in disqualification.</li>
+                        <li>Respect the time limits and challenge boundaries.</li>
+                    </ul>
+
+                    <h5>Conduct</h5>
+                    <ul>
+                        <li>Have fun, learn, and help others grow — but don’t spoil challenges.</li>
+                        <li>Respect the organizers, volunteers, and infrastructure.</li>
+                        <li>Report any unintended vulnerabilities in the platform to the admins immediately.</li>
+                        <li>Remember: <strong>The goal is learning and ethical hacking, not causing harm.</strong></li>
+                    </ul>
+<!-- &#73;&#67;&#84;&#65;&#75;&lbrace;&#82;&#117;&#108;&#101;&#115;&lowbar;&#97;&#114;&#101;&#95;&#82;&#117;&#108;&#101;&#115;&lowbar;&#65;&#108;&#119;&#97;&#121;&#115;&rbrace; -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

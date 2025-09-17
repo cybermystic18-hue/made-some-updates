@@ -1,0 +1,231 @@
+[
+  {
+    "id": "chal1",
+    "title": "Tokyo",
+    "description": "Take the flag from machine",
+    "category": "Web",
+    "base_score": 300,
+    "difficulty": "Easy",
+    "visible": true,
+    "solves": 0,
+    "requires": [],
+    "hints": [],
+    "flags": [
+      {
+        "id": "63a1b210-bdfa-4e3d-aeec-763c7650cec9",
+        "type": "dynamic",
+        "base_flag": "flag{byt3_w4s_h3r3_4ll_4l0ng}"
+      },
+      {
+        "id": "69b64cd2-7e2a-4613-9015-018cfda4ceca",
+        "type": "dynamic",
+        "base_flag": "flag{w3lc0m3_t0_m1dn1ght_c4f3}"
+      },
+      {
+        "id": "175fb68d-9b0a-4613-ac23-46032927afcd",
+        "type": "dynamic",
+        "base_flag": "flag{th3_m3nu_h1d3s_s3cr3ts}"
+      },
+      {
+        "id": "832764c8-0b9f-4aca-86bd-3ad534c3970f",
+        "type": "dynamic",
+        "base_flag": "flag{m4n4g3r_kn0ws_th3_tr4d3}"
+      }
+    ]
+  },
+  {
+    "id": "chronos_chronicle",
+    "title": "Article",
+    "description": "<!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n  <meta charset=\"UTF-8\">\r\n \r\n</head>\r\n<body style=\"font-family: Arial, sans-serif; line-height: 1.6; margin: 40px;\">\r\n\r\n \r\n\r\n  <p>\r\n   Welcome to The Chronos Chronicle, the world's first news platform for time travelers! Our articles are meticulously chrono-stamped. A notorious time-traveling hacker, Dr. Tempus, has hidden a secret editorial on the site. Rumor has it the editorial contains the flag.\r\n\r\nYour mission: Find Dr. Tempus's hidden editorial and retrieve the flag.\r\n\r\n  </p>\r\n\r\n  <p><strong>Flag format:</strong> CTF{anything_here_xxxxxxx}</p>\r\n\r\n\r\n  <p>\r\n    <a href=\"https://tryhackme.com/jr/article\" target=\"_blank\"> Access Room </a>\r\n  </p>\r\n\r\n  <div style=\"margin-top: 20px; padding: 10px 14px; border-radius: 8px;\r\n            background: rgba(20, 20, 30, 0.85);\r\n            border: 1px solid rgba(0, 150, 255, 0.3);\r\n            width: fit-content; font-size: 13px; color: #cfd8dc;\r\n            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\">\r\n  <p style=\"margin: 0;\">\r\n    <span style=\"color: #64b5f6;\">\u2726 Author:</span>\r\n    <span style=\"font-weight: 600; color: #90caf9;\">0verlo0ked</span>\r\n  </p>\r\n</div>\r\n\r\n</body>\r\n</html>\r\n\r\n\r\n\r\n",
+    "category": "Web",
+    "base_score": 200,
+    "difficulty": "Easy",
+    "visible": true,
+    "solves": 0,
+    "requires": [],
+    "hints": [
+      "Authors often have more to say behind closed doors.",
+      "Time is the key\u2014literally.",
+      "The platform uses UNIX timestamps as unique identifiers."
+    ],
+    "flags": [
+      {
+        "id": "0a578cdc-3d7a-49d1-9664-aa7667711051",
+        "type": "dynamic",
+        "base_flag": "CTF{T1m3_15_4_S0c14l_C0n5trvc7}"
+      }
+    ],
+    "files": []
+  },
+  {
+    "id": "lovenote",
+    "title": "Broken Form ",
+    "description": "<!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n  <meta charset=\"UTF-8\">\r\n \r\n</head>\r\n<body style=\"font-family: Arial, sans-serif; line-height: 1.6; margin: 40px;\">\r\n\r\n \r\n\r\n  <p>\r\n    Cupid Inc. has launched a new \"LoveNote Confessions\" service that lets users test-send love notes to themselves. However, their implementation has a critical vulnerability. Find the vulnerability, exploit it to discover Cupid's secret diary, and retrieve your unique flag from the hidden secrets file. \r\n  </p>\r\n\r\n  <p><strong>Flag format:</strong> ICTAK{Anything_here_xxxxxxx} </p>\r\n\r\n\r\n  <p>\r\n    <a href=\"https://tryhackme.com/jr/brokenni\" target=\"_blank\">Access Room</a>\r\n  </p>\r\n\r\n  <div style=\"margin-top: 20px; padding: 10px 14px; border-radius: 8px;\r\n            background: rgba(20, 20, 30, 0.85);\r\n            border: 1px solid rgba(0, 150, 255, 0.3);\r\n            width: fit-content; font-size: 13px; color: #cfd8dc;\r\n            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\">\r\n  <p style=\"margin: 0;\">\r\n    <span style=\"color: #64b5f6;\">\u2726 Author:</span>\r\n    <span style=\"font-weight: 600; color: #90caf9;\">0verlo0ked</span>\r\n  </p>\r\n</div>\r\n\r\n</body>\r\n</html>\r\n",
+    "category": "Web",
+    "base_score": 200,
+    "difficulty": "Easy",
+    "visible": true,
+    "solves": 0,
+    "requires": [],
+    "hints": [
+      "Maybe the input isn\u2019t just an email anymore\u2026",
+      "Not everything about Cupid\u2019s love life is hidden"
+    ],
+    "flags": [
+      {
+        "id": "8db384d4-f5dd-484c-9f90-9251c1132203",
+        "type": "dynamic",
+        "base_flag": "ICTAK{L0V3_15_4_S0C14L_C0NN3CT10N}"
+      }
+    ],
+    "files": []
+  },
+  {
+    "id": "lazydev",
+    "title": "Lazy Dev",
+    "description": "<!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n  <meta charset=\"UTF-8\">\r\n \r\n</head>\r\n<body style=\"font-family: Arial, sans-serif; line-height: 1.6; margin: 40px;\">\r\n\r\n \r\n\r\n  <p>\r\n    You are a freelance security consultant hired by \"MetaCortex Corp,\" a company that's about to launch its flagship project, \"Project Chimera.\" Rumor has it the project is behind schedule. Your contact, Ms. Evans, is worried about the security of their new employee portal. She's especially concerned about their new intern, Brandon, who was tasked with \"adding security features\" last week. Brandon was very enthusiastic but perhaps a bit careless. See if you can find what he left behind.< \r\n  </p>\r\n\r\n  <p><strong>Flag format:</strong> ICTAK{Anything_here_xxxxxxx}</p>\r\n\r\n\r\n  <p>\r\n    <a href=\"https://tryhackme.com/jr/lazydev\" target=\"_blank\">Access Room</a>\r\n  </p>\r\n\r\n  <div style=\"margin-top: 20px; padding: 10px 14px; border-radius: 8px;\r\n            background: rgba(20, 20, 30, 0.85);\r\n            border: 1px solid rgba(0, 150, 255, 0.3);\r\n            width: fit-content; font-size: 13px; color: #cfd8dc;\r\n            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\">\r\n  <p style=\"margin: 0;\">\r\n    <span style=\"color: #64b5f6;\">\u2726 Author:</span>\r\n    <span style=\"font-weight: 600; color: #90caf9;\">0verlo0ked</span>\r\n  </p>\r\n</div>\r\n\r\n</body>\r\n</html>\r\n",
+    "category": "Web",
+    "base_score": 200,
+    "difficulty": "Easy",
+    "visible": true,
+    "solves": 0,
+    "requires": [],
+    "hints": [
+      "Sometimes, the most revealing information isn't in the application itself, but in the comments left behind by developers. Always check the source code for hidden messages.",
+      "When developers leave debugging features enabled, they often reveal more than intended. Explore any diagnostic endpoints you discover thoroughly.",
+      "Configuration files often contain sensitive information. If you know an application's internal structure, look for common configuration files in exposed directories."
+    ],
+    "flags": [
+      {
+        "id": "055727e3-5f49-435c-af75-c5941ca0b799",
+        "type": "dynamic",
+        "base_flag": "ICTAK{0v3rZ3a10u5_1n73rn_Strik3s_4ga1n}"
+      }
+    ],
+    "files": []
+  },
+  {
+    "id": "crypto1",
+    "title": "Numbers Remix",
+    "description": "<!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n  <meta charset=\"UTF-8\">\r\n \r\n</head>\r\n<body style=\"font-family: Arial, sans-serif; line-height: 1.6; margin: 40px;\">\r\n\r\n \r\n\r\n  <p>\r\n   The wall is full of numbers, scratched one over the other.<br>\r\n    At first glance, they don\u2019t map directly to letters.<br>\r\n    Maybe the wall is hiding something deeper\u2026\r\n  </p>\r\n\r\n  <p><strong>Flag format:</strong> ICTAK{Anything_here}</p>\r\n\r\n\r\n  <p>\r\n    <a href=\"https://postimg.cc/0MG0pp5j\" target=\"_blank\">\ud83d\udce5 Download Image</a>\r\n  </p>\r\n\r\n  <div style=\"margin-top: 20px; padding: 10px 14px; border-radius: 8px;\r\n            background: rgba(20, 20, 30, 0.85);\r\n            border: 1px solid rgba(0, 150, 255, 0.3);\r\n            width: fit-content; font-size: 13px; color: #cfd8dc;\r\n            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\">\r\n  <p style=\"margin: 0;\">\r\n    <span style=\"color: #64b5f6;\">\u2726 Author:</span>\r\n    <span style=\"font-weight: 600; color: #90caf9;\">0verlo0ked</span>\r\n  </p>\r\n</div>\r\n\r\n</body>\r\n</html>\r\n",
+    "category": "Crypto",
+    "base_score": 100,
+    "difficulty": "Easy",
+    "visible": true,
+    "solves": 0,
+    "requires": [],
+    "hints": [],
+    "flags": [
+      {
+        "id": "c50791f9-c052-4102-b626-37707135e574",
+        "type": "static",
+        "flag": "ICTAK{PRIMES_ARE_FUN}"
+      }
+    ],
+    "files": []
+  },
+  {
+    "id": "osint1",
+    "title": "The Last Check-In",
+    "description": "<!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n  <meta charset=\"UTF-8\">\r\n \r\n</head>\r\n<body style=\"font-family: Arial, sans-serif; line-height: 1.6; margin: 40px;\">\r\n\r\n \r\n\r\n  <p>\r\n    A missing journalist, 'Ananya,' last posted a photo on her blog. The photo is a close-up of a wall with a unique sculpture. The photo's timestamp is 10-09-2025 at 11:33 AM. Find the exact location of this sculpture and its coordinates. \r\n  </p>\r\n\r\n  <p><strong>Flag format:</strong> ICTAK{Lulu_Mall_latitude_longitude} coordinates upto 7 decimal places</p>\r\n\r\n\r\n  <p>\r\n    <a href=\"https://postimg.cc/TKhRRTN1\" target=\"_blank\">\ud83d\udce5 Download Image</a>\r\n  </p>\r\n\r\n  <div style=\"margin-top: 20px; padding: 10px 14px; border-radius: 8px;\r\n            background: rgba(20, 20, 30, 0.85);\r\n            border: 1px solid rgba(0, 150, 255, 0.3);\r\n            width: fit-content; font-size: 13px; color: #cfd8dc;\r\n            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\">\r\n  <p style=\"margin: 0;\">\r\n    <span style=\"color: #64b5f6;\">\u2726 Author:</span>\r\n    <span style=\"font-weight: 600; color: #90caf9;\">0verlo0ked</span>\r\n  </p>\r\n</div>\r\n\r\n</body>\r\n</html>\r\n",
+    "category": "Misc",
+    "base_score": 50,
+    "difficulty": "Easy",
+    "visible": true,
+    "solves": 1,
+    "requires": [],
+    "hints": [],
+    "flags": [
+      {
+        "id": "a310fb25-e4d4-4f5c-a982-47a5341e681a",
+        "type": "static",
+        "flag": "ICTAK{Jawahar_Park_9.9679999_76.2439208}"
+      }
+    ]
+  },
+  {
+    "id": "osint2",
+    "title": "The Last Check-In 2",
+    "description": "<!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n  <meta charset=\"UTF-8\">\r\n  \r\n</head>\r\n<body style=\"font-family: Arial, sans-serif; line-height: 1.6; margin: 40px;\">\r\n\r\n  \r\n\r\n  <p>\r\n   Ananya left a cryptic message for a street performer. The message was just a name and a number: 'Sunil: 9.9678, 76.2415'. This is the location of her next clue. The flag is the name of the nearest major church.\r\n  </p>\r\n\r\n  <p><strong>Flag format:</strong> ICTAK{Underscore_Between_Words}</p>\r\n\r\n  \r\n\r\n  <div style=\"margin-top: 20px; padding: 10px 14px; border-radius: 8px;\r\n            background: rgba(20, 20, 30, 0.85);\r\n            border: 1px solid rgba(0, 150, 255, 0.3);\r\n            width: fit-content; font-size: 13px; color: #cfd8dc;\r\n            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\">\r\n  <p style=\"margin: 0;\">\r\n    <span style=\"color: #64b5f6;\">\u2726 Author:</span>\r\n    <span style=\"font-weight: 600; color: #90caf9;\">0verlo0ked</span>\r\n  </p>\r\n</div>\r\n\r\n</body>\r\n</html>\r\n",
+    "category": "Misc",
+    "base_score": 50,
+    "difficulty": "Easy",
+    "visible": true,
+    "solves": 1,
+    "requires": [
+      "osint1"
+    ],
+    "hints": [],
+    "flags": [
+      {
+        "id": "67be07e4-c187-461f-b803-ddff8341aae0",
+        "type": "static",
+        "flag": "ICTAK{Santa_Cruz_Cathedral_Basilica}"
+      }
+    ]
+  },
+  {
+    "id": "osint3",
+    "title": "The Last Check-In 3",
+    "description": "<!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n  <meta charset=\"UTF-8\">\r\n  \r\n</head>\r\n<body style=\"font-family: Arial, sans-serif; line-height: 1.6; margin: 40px;\">\r\n\r\n  \r\n\r\n  <p>\r\n   A small, unassuming QR code was found taped to a lamppost near the church. Scanning it reveals a long string of  characters. The flag is the name of the bridge, with spaces replaced by underscores.\r\n  </p>\r\n\r\n  <p><strong>Flag format:</strong> ICTAK{Underscore_Between_Words}</p>\r\n\r\n   <p>\r\n    <a href=\"https://postimg.cc/zVKnn0MF\" target=\"_blank\">\ud83d\udce5 Download Image</a>\r\n  </p>\r\n\r\n <div style=\"margin-top: 20px; padding: 10px 14px; border-radius: 8px;\r\n            background: rgba(20, 20, 30, 0.85);\r\n            border: 1px solid rgba(0, 150, 255, 0.3);\r\n            width: fit-content; font-size: 13px; color: #cfd8dc;\r\n            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\">\r\n  <p style=\"margin: 0;\">\r\n    <span style=\"color: #64b5f6;\">\u2726 Author:</span>\r\n    <span style=\"font-weight: 600; color: #90caf9;\">0verlo0ked</span>\r\n  </p>\r\n</div>\r\n\r\n</body>\r\n</html>\r\n",
+    "category": "Misc",
+    "base_score": 50,
+    "difficulty": "Medium",
+    "visible": true,
+    "solves": 0,
+    "requires": [
+      "osint1",
+      "osint2"
+    ],
+    "hints": [
+      "bridge is on KL - EKM"
+    ],
+    "flags": [
+      {
+        "id": "502f3b57-9f2d-4c98-babf-77ec685ba486",
+        "type": "static",
+        "flag": "ICTAK{Old_Harbour_Bridge}"
+      }
+    ]
+  },
+  {
+    "id": "starter",
+    "title": "I caught U",
+    "description": "GET ME IF U CAN >>>>",
+    "category": "Misc",
+    "base_score": 100,
+    "difficulty": "Easy",
+    "visible": true,
+    "solves": 0,
+    "requires": [],
+    "hints": [],
+    "flags": [
+      {
+        "id": "c2d9af11-b853-4bc2-99ac-297644c7707c",
+        "type": "static",
+        "flag": "ICTAK{Rules_are_Rules_Always}"
+      }
+    ],
+    "files": []
+  },
+  {
+    "id": "crypto2",
+    "title": "Swap Hiest",
+    "description": "<!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n  <meta charset=\"UTF-8\">\r\n \r\n</head>\r\n<body style=\"font-family: Arial, sans-serif; line-height: 1.6; margin: 40px;\">\r\n\r\n \r\n\r\n  <p>\r\n   The author was in a hurry and decided to \u201cswap\u201d \u2014 some of them, at least. \r\n\r\n<br>\r\nsdmplc orcqgcney bnblysds wdll hclp.\r\nrcbi cvcry scntcnec ebrcoglly.\r\nsfmc vfwcls wcrc swbppci wdth efnsfnbnts.\r\ngsdnu shfrt wfris ldkc thc, ds, bni wdll hclps.\r\nnftc fnly odvc vfwcl efnsfnbnt pbdrs brc swbppci.\r\nrcvcrsc thc odvc swbps tf rcefvcr thc elcbr tcxt.\r\nuffi lgek bni hbppy sflvdnu.\r\nefnurbtglbtdfns, arbvc sflvcr: thc olbu ds DETBK{abiuc_frqgcney_substbtbtcon_cyphcr}.\r\n  </p>\r\n\r\n  <p><strong>Flag format:</strong> ICTAK{Anything_Here}</p>\r\n\r\n\r\n  <p>\r\n    <a href=\"https://postimg.cc/TKhRRTN1\" target=\"_blank\">\ud83d\udce5 Download Image</a>\r\n  </p>\r\n\r\n  <div style=\"margin-top: 20px; padding: 10px 14px; border-radius: 8px;\r\n            background: rgba(20, 20, 30, 0.85);\r\n            border: 1px solid rgba(0, 150, 255, 0.3);\r\n            width: fit-content; font-size: 13px; color: #cfd8dc;\r\n            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\">\r\n  <p style=\"margin: 0;\">\r\n    <span style=\"color: #64b5f6;\">\u2726 Author:</span>\r\n    <span style=\"font-weight: 600; color: #90caf9;\">0verlo0ked</span>\r\n  </p>\r\n</div>\r\n\r\n</body>\r\n</html>\r\n",
+    "category": "Crypto",
+    "base_score": 50,
+    "difficulty": "Easy",
+    "visible": true,
+    "solves": 0,
+    "requires": [],
+    "hints": [],
+    "flags": [
+      {
+        "id": "035e5797-40d1-4741-9505-8fcad872cfb5",
+        "type": "static",
+        "flag": "ICTAK{badge_frequency_substitution_cipher}"
+      }
+    ],
+    "files": []
+  }
+]

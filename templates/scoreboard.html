@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}🏴‍☠️ Bounty Board - Grand Line CTF{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <div class="card bg-ship glow-treasure">
+            <div class="card-header text-center">
+                <h2><i class="fas fa-crown text-yonko"></i> Bounty Board</h2>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover text-light">
+                        <thead>
+                            <tr>
+                                <th scope="col">Rank</th>
+                                <th scope="col">Pirate / Crew</th>
+                                <th scope="col">Bounty (Score)</th>
+                                <th scope="col">Treasures Found (Solves)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for entry in leaderboard %}
+                            <tr {% if entry.is_team %}class="table-yonko"{% endif %}>
+                                <td>{{ loop.index }}</td>
+                                <td>
+                                    {% if entry.is_team %}
+                                    <i class="fas fa-ship me-2 text-yonko"></i>
+                                    <strong class="text-yonko">{{ entry.name }}</strong>
+                                    <br>
+                                    <small class="text-muted fst-italic ms-4">
+                                        Crew: {{ entry.members|join(', ') }}
+                                    </small>
+                                    {% else %}
+                                    <a href="{{ url_for('user_profile', username=entry.name) }}" class="text-info text-decoration-none">
+                                        <i class="fas fa-user-pirate me-2"></i> {{ entry.name }}
+                                    </a>
+                                    {% endif %}
+                                </td>
+                                <td>{{ entry.total }}</td>
+                                <td>{{ entry.solves }}</td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td colspan="4" class="text-center text-muted">No pirates on the bounty board yet. Be the first to claim a bounty!</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

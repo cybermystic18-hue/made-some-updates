@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+
+{% block title %}🏴‍☠️ Crew Management - Grand Line CTF{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <h1 class="text-center text-yonko mb-4">
+            <i class="fas fa-users-cog"></i> Crew Management
+        </h1>
+
+        {% if team_mode %}
+            {% if user and not user.team_id %}
+            <div class="card bg-ship mb-4 text-center">
+                <div class="card-body">
+                    <h5 class="card-title text-treasure">Join or Create a Crew</h5>
+                    <p class="card-text text-light">
+                        You are currently sailing alone. Form a new crew or send a request to join an existing one to sail the Grand Line together!
+                    </p>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createTeamModal">
+                        <i class="fas fa-users"></i> Create New Crew
+                    </button>
+                </div>
+            </div>
+            {% elif user and user.team_id and user.team_status == 'pending' %}
+            <div class="alert alert-warning text-center ship-sail mb-4">
+                <i class="fas fa-hourglass-half"></i> You have requested to join a crew. Your request is awaiting approval from the crew leader...
+                <form action="{{ url_for('withdraw_join_request', team_id=user.team_id) }}" method="POST" class="d-inline ms-3">
+                    <button type="submit" class="btn btn-sm btn-danger">
+                        <i class="fas fa-times"></i> Withdraw Request
+                    </button>
+                </form>
+            </div>
+            {% endif %}
+        {% endif %}
+
+        <div class="modal fade" id="createTeamModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content bg-ship text-light">
+                    <form action="{{ url_for('create_team') }}" method="POST">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="createTeamModalLabel">Create New Crew</h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="team_name" class="form-label">Crew Name (Max 24 chars)</label>
+                                <input type="text" class="form-control bg-dark text-light border-secondary" id="team_name" name="team_name" maxlength="24" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Create Crew</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="text-yonko mb-3">All Crews Sailing the Seas</h2>
+        {% if teams %}
+        <div class="list-group">
+            {% for team in teams %}
+            <div class="list-group-item bg-dark text-light mb-3 ship-sail d-flex justify-content-between align-items-center border-secondary">
+                <div>
+                    <h5 class="mb-1 text-treasure">{{ team.name }}</h5>
+                    <small class="text-muted">Members: {{ team.member_count }}</small>
+                </div>
+                <div>
+                    {% if user and user.team_id and user.team_id == team.id and team.creator_id == user.id %}
+                    <a href="{{ url_for('manage_team', team_id=team.id) }}" class="btn btn-sm btn-info me-2">
+                        <i class="fas fa-tools"></i> Manage Crew
+                    </a>
+                    {% endif %}
+                    {% if user and not user.team_id %}
+                    <form action="{{ url_for('join_team', team_id=team.id) }}" method="POST" class="d-inline">
+                        <button type="submit" class="btn btn-sm btn-success">
+                            <i class="fas fa-handshake"></i> Request to Join
+                        </button>
+                    </form>
+                    {% elif user and user.team_id == team.id %}
+                        {% if user.team_status == 'member' %}
+                            <form action="{{ url_for('leave_team', team_id=team.id) }}" method="POST" class="d-inline">
+                                <button type="submit" class="btn btn-sm btn-danger">
+                                    <i class="fas fa-sign-out-alt"></i> Abandon Crew
+                                </button>
+                            </form>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="alert alert-info text-center ship-sail">
+            No crews have been formed yet. Be the first to start one!
+        </div>
+        {% endif %}
+
+        {% if user_team %}
+        <h2 class="text-yonko mt-5 mb-3">
+            <i class="fas fa-list-ul"></i> Crew's Treasure Log
+        </h2>
+        <div class="row">
+            {% for username, solves in team_solves_by_member.items() %}
+            <div class="col-md-6 mb-4">
+                <div class="card bg-dark text-light glow-ocean border-secondary">
+                    <div class="card-header">
+                        <h5 class="mb-0 text-treasure">
+                            <i class="fas fa-user-pirate"></i> {{ username }}'s Finds
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        {% if solves %}
+                            <ul class="list-group list-group-flush">
+                                {% for solve in solves %}
+                                <li class="list-group-item bg-dark text-light d-flex justify-content-between align-items-center border-secondary">
+                                    <i class="fas fa-gem text-warning me-2"></i>
+                                    <div class="flex-grow-1">
+                                        {{ solve.challenge_title }}
+                                        <small class="d-block text-muted">{{ solve.timestamp[:16] }}</small>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <div class="alert alert-info text-center ship-sail mb-0">
+                                This crewmate has not found any treasures yet.
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

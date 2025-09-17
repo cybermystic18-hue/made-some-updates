@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+
+{% block title %}Manage Users - Admin Panel{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h2><i class="fas fa-users"></i> Manage Users</h2>
+        <a href="{{ url_for('admin_panel') }}" class="btn btn-secondary mb-3">
+            <i class="fas fa-arrow-left"></i> Back to Admin Panel
+        </a>
+    </div>
+</div>
+
+<div class="row mb-3">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <form method="GET" action="{{ url_for('admin_users') }}">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search by username or email..." name="search_query" value="{{ search_query }}">
+                        <button class="btn btn-primary" type="submit">
+                            <i class="fas fa-search"></i> Search
+                        </button>
+                        {% if search_query %}
+                        <a href="{{ url_for('admin_users') }}" class="btn btn-secondary">Clear</a>
+                        {% endif %}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Registered Users ({{ users|length }})</h5>
+            </div>
+            <div class="card-body">
+                {% if users %}
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>Team</th>
+                                <th>Status</th>
+                                <th>Registered</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for user in users %}
+                            <tr>
+                                <td>{{ user.username }}</td>
+                                <td>{{ user.email }}</td>
+                                <td>{{ user.team_name or 'N/A' }}</td>
+                                <td>
+                                    {% if user.is_admin %}
+                                        <span class="badge bg-warning">Admin</span>
+                                    {% elif user.is_banned %}
+                                        <span class="badge bg-danger">Banned</span>
+                                    {% else %}
+                                        <span class="badge bg-success">Active</span>
+                                    {% endif %}
+                                </td>
+                                <td>{{ user.created_at[:10] if user.created_at else 'N/A' }}</td>
+                                <td>
+                                    {% if not user.is_admin %}
+                                        {% if user.is_banned %}
+                                        <form method="post" action="{{ url_for('deban_user', user_id=user.id) }}" style="display:inline;">
+                                            <button type="submit" class="btn btn-sm btn-success" onclick="return confirm('Deban {{ user.username }}?');">
+                                                <i class="fas fa-user-check"></i> Deban
+                                            </button>
+                                        </form>
+                                        {% else %}
+                                        <form method="post" action="{{ url_for('promote_user', user_id=user.id) }}" style="display:inline;">
+                                            <button type="submit" class="btn btn-sm btn-warning" onclick="return confirm('Promote {{ user.username }} to admin?');">
+                                                <i class="fas fa-user-shield"></i> Promote
+                                            </button>
+                                        </form>
+                                        <form method="post" action="{{ url_for('ban_user', user_id=user.id) }}" style="display:inline;">
+                                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Ban {{ user.username }}?');">
+                                                <i class="fas fa-user-times"></i> Ban
+                                            </button>
+                                        </form>
+                                        {% endif %}
+                                    {% else %}
+                                    <span class="text-muted">-</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <p class="text-muted">No users found.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Recent Login Logs (Last 50)</h5>
+            </div>
+            <div class="card-body">
+                {% if logins %}
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Timestamp</th>
+                                <th>Username</th>
+                                <th>IP Address</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for login in logins[-50:] %}
+                            <tr>
+                                <td>{{ login.timestamp[:19] if login.timestamp else 'N/A' }}</td>
+                                <td>{{ login.username }}</td>
+                                <td><code>{{ login.ip }}</code></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <p class="text-muted">No login logs available.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

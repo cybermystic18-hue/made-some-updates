@@ -1,0 +1,387 @@
+{% extends "base.html" %}
+
+{% block title %}🏴‍☠️ Your Pirate Ship - Grand Line CTF{% endblock %}
+
+{% block head %}
+<style>
+    /* Charging Buster Background Effect */
+    body.ctf-active {
+        --progress: {{ progress_percent / 100 }};
+        --hue: calc(180 + var(--progress) * 120); /* Blue (180) to Yellow/Orange (300) */
+        --brightness: calc(0.3 + var(--progress) * 0.5); /* Faint to intense */
+        --speed: calc(15s - var(--progress) * 10s); /* Slow to fast */
+        background: radial-gradient(circle at center,
+                                    hsla(var(--hue), 80%, 50%, var(--brightness)),
+                                    hsla(var(--hue), 80%, 50%, 0) 50%),
+                    #000;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+        background-size: 100vmax 100vmax;
+        animation: rotate-buster var(--speed) linear infinite;
+        transition: background 1s ease-in-out;
+    }
+    
+    @keyframes rotate-buster {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+{% if not ctf_active %}
+    <div class="text-center">
+        <div class="card bg-ship glow-treasure">
+            <div class="card-body">
+                <h2><i class="fas fa-anchor text-treasure"></i> The Blue Sea Bootcamp is Closed</h2>
+                <p class="lead">The treasure hunt is not currently active. Return when the winds favor adventure, future Pirate King!</p>
+                <div class="mt-3">
+                    <span class="badge badge-paramecia">🔥 Devil Fruit Powers</span>
+                    <span class="badge badge-logia">⚡ Logia Types</span>
+                    <span class="badge badge-zoan">🦁 Zoan Forms</span>
+                    <span class="badge badge-special">✨ Special Abilities</span>
+                    <span class="badge badge-marine">⚓ Marine Justice</span>
+                </div>
+            </div>
+        </div>
+        
+        {% if latest_announcement %}
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card bg-ship glow-ocean">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">
+                            <i class="fas fa-scroll text-yonko"></i> Latest News Coo Message
+                        </h5>
+                        {% if all_announcements|length > 1 %}
+                        <button class="btn btn-sm btn-outline-info" data-bs-toggle="modal" data-bs-target="#allAnnouncementsModal">
+                            <i class="fas fa-feather"></i> View All Messages ({{ all_announcements|length }})
+                        </button>
+                        {% endif %}
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex align-items-start">
+                            <i class="fas fa-feather fa-2x text-treasure me-3"></i>
+                            <div>
+                                <h6 class="text-treasure">{{ latest_announcement.title }}</h6>
+                                <p class="mb-1">{{ latest_announcement.content }}</p>
+                                <small class="text-muted">📅 {{ latest_announcement.timestamp[:16] if latest_announcement.timestamp else 'Unknown Date' }}</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+{% else %}
+    <div class="row">
+        <div class="col-md-9">
+            <div class="modal fade" id="allAnnouncementsModal" tabindex="-1" aria-labelledby="allAnnouncementsModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                    <div class="modal-content bg-ship">
+                        <div class="modal-header border-bottom border-treasure">
+                            <h5 class="modal-title text-yonko" id="allAnnouncementsModalLabel">
+                                <i class="fas fa-scroll"></i> All Ship's Log Entries ({{ all_announcements|length }})
+                            </h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            {% for announcement in all_announcements|reverse %}
+                            <div class="announcement-item mb-3 {% if loop.first %}latest-announcement{% endif %}">
+                                <div class="alert alert-info ship-sail">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div class="flex-grow-1">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <i class="fas fa-feather text-treasure me-2"></i>
+                                                <h6 class="mb-0 text-yonko">
+                                                    {% if loop.first %}
+                                                    <span class="badge bg-success me-2">⭐ LATEST</span>
+                                                    {% endif %}
+                                                    {{ announcement.title }}
+                                                </h6>
+                                            </div>
+                                            <p class="mb-0">{{ announcement.content }}</p>
+                                        </div>
+                                        <div class="text-end">
+                                            <small class="text-muted">
+                                                <i class="fas fa-calendar"></i>
+                                                {{ announcement.timestamp[:10] if announcement.timestamp else 'N/A' }}
+                                                <br>
+                                                <i class="fas fa-clock"></i>
+                                                {{ announcement.timestamp[11:16] if announcement.timestamp else '' }}
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <div class="modal-footer border-top border-treasure">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                <i class="fas fa-times"></i> Close Log
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            {% set devil_fruit_types = challenges|groupby('category') %}
+            {% for fruit_type, type_challenges in devil_fruit_types %}
+            <div class="mb-5">
+                <h3 class="text-yonko">
+                    <i class="fas fa-{{ {'Web': 'fire', 'Crypto': 'bolt', 'Pwn': 'fist-raised', 'Rev': 'snowflake', 'Forensics': 'water', 'Misc': 'star'}[fruit_type] or 'star' }}"></i>
+                    {{ {'Web': '🔥 WEB ', 'Crypto': '⚡ CRYPTO ', 'Pwn': '🌊 PWN ', 'Rev': '❄ REVERSE ', 'Forensics': '🌊 FORENSICS ', 'Misc': '✨ MISC '}[fruit_type] or fruit_type }}
+                </h3>
+                <div class="row">
+                    {% for treasure in type_challenges %}
+                    <div class="col-md-6 col-lg-4 mb-3">
+                        <div class="card devil-fruit-card {{ 'completed' if treasure.is_complete else ('locked' if not treasure.unlocked else '') }} {{ {'Web': 'df-paramecia', 'Crypto': 'df-logia', 'Pwn': 'df-special', 'Rev': 'df-zoan', 'Forensics': 'df-logia', 'Misc': 'df-treasure'}[fruit_type] or 'df-treasure' }}">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <h5 class="card-title text-treasure" style="color: #fff; text-decoration: none;">
+                                        {{ treasure.title }}
+                                        {% if treasure.is_complete %}
+                                            <i class="fas fa-gem text-warning"></i>
+                                        {% elif not treasure.unlocked %}
+                                            <i class="fas fa-lock text-muted"></i>
+                                        {% endif %}
+                                    </h5>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <span class="bounty-rank {{ {'Easy': 'rank-rookie', 'Medium': 'rank-pirate', 'Hard': 'rank-supernova'}[treasure.difficulty] or 'rank-rookie' }}">
+                                        {{ treasure.difficulty }} Bounty
+                                    </span>
+                                    <span class="badge badge-{{ {'Web': 'paramecia', 'Crypto': 'logia', 'Pwn': 'special', 'Rev': 'zoan', 'Forensics': 'logia', 'Misc': 'treasure'}[fruit_type] or 'treasure' }}">
+                                        {{ treasure.base_score }} Berry
+                                    </span>
+                                    <span class="badge bg-info">{{ treasure.solves }} Pirates</span>
+                                </div>
+                                
+                                {% if treasure.unlocked %}
+                                    <a href="{{ url_for('challenge_view', challenge_id=treasure.id) }}" class="btn btn-primary glow-treasure {% if treasure.is_complete %}btn-success{% endif %}">
+                                        {% if treasure.is_complete %}
+                                            <i class="fas fa-crown"></i> Treasure Found
+                                        {% else %}
+                                            <i class="fas fa-map"></i> Hunt Treasure
+                                        {% endif %}
+                                    </a>
+                                {% else %}
+                                    <button class="btn btn-warning" disabled>
+                                        <i class="fas fa-lock"></i> Sealed
+                                    </button>
+                                {% if treasure.requires %}
+                                <small class="d-block text-muted mt-1">
+                                    Requires: {{ treasure.requires|join(', ') }}
+                                </small>
+                                {% endif %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="col-md-3">
+            <div class="card bg-ship glow-treasure mb-3">
+                <div class="card-header">
+                    <h6 id="timer-title"><i class="fas fa-hourglass-half text-yonko"></i> CTF Timer</h6>
+                    <input type="hidden" id="ctf-start-time" data-timestamp="{{ ctf_start }}">
+                    <input type="hidden" id="ctf-end-time" data-timestamp="{{ ctf_end }}">
+                </div>
+                <div class="card-body text-center">
+                    <div id="ctf-timer" style="font-size: 1.5rem; font-weight: bold;">Loading...</div>
+                </div>
+            </div>
+
+            <div class="card bg-ship glow-treasure mb-3">
+                <div class="card-header">
+                    <h6><i class="fas fa-skull-crossbones text-yonko"></i> Your Bounty Status</h6>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between mb-2">
+                        <span class="text-muted">Rank:</span>
+                        <span class="text-treasure">#{{ user_rank if user_rank else '∞' }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span class="text-muted">Bounty:</span>
+                        <span class="text-yonko">{{ user_total_score }}฿</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-3">
+                        <span class="text-muted">Treasures:</span>
+                        <span class="text-warning">{{ user_solved_count }}/{{ total_challenges }}</span>
+                    </div>
+                    <div class="progress mb-2">
+                        <div class="progress-bar" role="progressbar" style="width: {{ progress_percent }}%;"
+                             aria-valuenow="{{ progress_percent }}" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <small class="text-muted">Progress to Pirate King</small>
+                </div>
+            </div>
+            
+            <div class="card bg-ship glow-ocean mb-3">
+                <div class="card-header">
+                    <h6><i class="fas fa-rss text-yonko"></i> News Coo Feed</h6>
+                </div>
+                <div class="card-body" style="max-height: 400px; overflow-y: auto;">
+                    <div id="live-feed">
+                        <p class="text-muted text-center">Loading feed...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card bg-ship">
+                <div class="card-header">
+                    <h6><i class="fas fa-gem text-yonko"></i> Recent Treasure Hunts</h6>
+                </div>
+                <div class="card-body">
+                    {% if recent_solves %}
+                        {% for find in recent_solves %}
+                        <div class="d-flex align-items-center mb-2 treasure-found">
+                            <i class="fas fa-coins text-warning me-2"></i>
+                            <div class="flex-grow-1">
+                                <small class="text-treasure">{{ find.challenge_title }}</small>
+                                <div class="text-muted" style="font-size: 0.7rem;">{{ find.timestamp[:16] if find.timestamp else '' }}</div>
+                            </div>
+                            <span class="badge badge-treasure">+{{ find.score }}฿</span>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                    <p class="text-muted text-center">
+                        <i class="fas fa-map"></i><br>
+                        No treasure found yet.<br>
+                        Start your adventure!
+                    </p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+<div class="modal fade" id="treasureModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-yonko" id="treasureTitle">
+                    <i class="fas fa-map"></i> <span id="treasureTitleText"></span>
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="card bg-ship mb-3">
+                    <div class="card-body">
+                        <div id="treasureDescription" class="mb-3"></div>
+                    </div>
+                </div>
+                
+                <form id="treasureForm">
+                    <label class="form-label text-treasure">
+                        <i class="fas fa-key"></i> Enter the Secret Treasure Code:
+                    </label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="treasureInput"
+                               placeholder="ONEPIECE{treasure_location}" required
+                               style="font-family: 'Courier New', monospace;">
+                        <input type="hidden" id="treasureId">
+                        <button type="submit" class="btn btn-primary glow-treasure">
+                            <i class="fas fa-search"></i> Hunt Treasure
+                        </button>
+                    </div>
+                </form>
+                <div id="treasureResult" class="mt-3"></div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const ctfStart = moment("{{ ctf_start }}");
+        const ctfEnd = moment("{{ ctf_end }}");
+        const ctfActive = "{{ ctf_active }}" === "True";
+        
+        function updateTimer() {
+            const now = moment();
+            const timerElement = document.getElementById('ctf-timer');
+            const titleElement = document.getElementById('timer-title');
+            
+            if (!ctfActive) {
+                timerElement.innerHTML = 'CTF is not active.';
+                titleElement.innerHTML = '<i class="fas fa-hourglass-end text-danger"></i> CTF Status';
+            } else if (now.isBefore(ctfStart)) {
+                const diff = moment.duration(ctfStart.diff(now));
+                timerElement.innerHTML = `Starts in:<br>${diff.days()}d ${diff.hours()}h ${diff.minutes()}m ${diff.seconds()}s`;
+                titleElement.innerHTML = '<i class="fas fa-hourglass-start text-info"></i> Time to Start';
+            } else if (now.isBetween(ctfStart, ctfEnd)) {
+                const diff = moment.duration(ctfEnd.diff(now));
+                timerElement.innerHTML = `Ends in:<br>${diff.days()}d ${diff.hours()}h ${diff.minutes()}m ${diff.seconds()}s`;
+                titleElement.innerHTML = '<i class="fas fa-hourglass-half text-danger"></i> Time Left';
+            } else {
+                timerElement.innerHTML = 'CTF has ended.';
+                titleElement.innerHTML = '<i class="fas fa-hourglass-end text-danger"></i> CTF Status';
+            }
+        }
+        setInterval(updateTimer, 1000);
+        updateTimer(); // Initial call
+        
+        // Live event feed
+        const liveFeed = document.getElementById('live-feed');
+        function fetchEvents() {
+            fetch('/api/event_feed')
+                .then(response => response.json())
+                .then(events => {
+                    liveFeed.innerHTML = '';
+                    events.reverse().forEach(event => {
+                        let icon = '';
+                        let color = '';
+                        switch(event.type) {
+                            case 'solve':
+                            case 'team_solve':
+                                icon = 'fa-gem';
+                                color = 'text-warning';
+                                break;
+                            case 'announcement':
+                                icon = 'fa-scroll';
+                                color = 'text-info';
+                                break;
+                            case 'team_join':
+                            case 'user_join':
+                                icon = 'fa-users-cog';
+                                color = 'text-success';
+                                break;
+                        }
+                        const eventHtml = `
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="fas ${icon} ${color} me-2"></i>
+                                <div class="flex-grow-1">
+                                    <small class="text-muted" style="font-size: 0.7rem;">${moment(event.timestamp).fromNow()}</small><br>
+                                    <span class="text-light">${event.message}</span>
+                                </div>
+                            </div>
+                        `;
+                        liveFeed.innerHTML += eventHtml;
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching event feed:', error);
+                    liveFeed.innerHTML = '<p class="text-muted">Could not load feed...</p>';
+                });
+        }
+        fetchEvents();
+        setInterval(fetchEvents, 5000); // Poll every 5 seconds
+    });
+</script>
+{% endblock %}
