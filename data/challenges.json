@@ -132,7 +132,7 @@
     "base_score": 50,
     "difficulty": "Easy",
     "visible": true,
-    "solves": 1,
+    "solves": 0,
     "requires": [],
     "hints": [],
     "flags": [
@@ -151,7 +151,7 @@
     "base_score": 50,
     "difficulty": "Easy",
     "visible": true,
-    "solves": 1,
+    "solves": 0,
     "requires": [
       "osint1"
     ],
@@ -224,6 +224,66 @@
         "id": "035e5797-40d1-4741-9505-8fcad872cfb5",
         "type": "static",
         "flag": "ICTAK{badge_frequency_substitution_cipher}"
+      }
+    ],
+    "files": []
+  },
+  {
+    "id": "web5",
+    "title": "Leak",
+    "description": "<!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n  <meta charset=\"UTF-8\">\r\n \r\n</head>\r\n<body style=\"font-family: Arial, sans-serif; line-height: 1.6; margin: 40px;\">\r\n\r\n \r\n\r\n  <p>\r\nA fictional small company has a job posting service\r\n  </p>\r\n\r\n  <p><strong>Flag format:</strong> ICTAK{anything_here_xxxxxxx}</p>\r\n\r\n\r\n  <p>\r\n    <a href=\"https://cheerful-melomakarona-37cc45.netlify.app/\" target=\"_blank\"> Access Lab </a>\r\n  </p>\r\n\r\n  <div style=\"margin-top: 20px; padding: 10px 14px; border-radius: 8px;\r\n            background: rgba(20, 20, 30, 0.85);\r\n            border: 1px solid rgba(0, 150, 255, 0.3);\r\n            width: fit-content; font-size: 13px; color: #cfd8dc;\r\n            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\">\r\n  <p style=\"margin: 0;\">\r\n    <span style=\"color: #64b5f6;\">\u2726 Author:</span>\r\n    <span style=\"font-weight: 600; color: #90caf9;\">0verlo0ked</span>\r\n  </p>\r\n</div>\r\n\r\n</body>\r\n</html>\r\n\r\n\r\n\r\n",
+    "category": "Web",
+    "base_score": 100,
+    "difficulty": "Easy",
+    "visible": true,
+    "solves": 0,
+    "requires": [],
+    "hints": [],
+    "flags": [
+      {
+        "id": "ed6d76df-db2c-4d09-b36b-5e072beafd41",
+        "type": "static",
+        "flag": "ICTAK{found_in_job_post}"
+      }
+    ],
+    "files": []
+  },
+  {
+    "id": "web6",
+    "title": "Devs Legacy",
+    "description": "<!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n  <meta charset=\"UTF-8\">\r\n \r\n</head>\r\n<body style=\"font-family: Arial, sans-serif; line-height: 1.6; margin: 40px;\">\r\n\r\n \r\n\r\n  <p>\r\nOur small developer tools team left behind a legacy demo service used for quick demos and internal testing.\r\n      It\u2019s supposed to show basic profile data to authenticated users \u2014 but some old developer habits remain.\r\n      Your objective: retrieve the secret they kept in their record.\r\n  </p>\r\n\r\n  <p><strong>Flag format:</strong> ICTAK{anything_here_xxxxxxx}</p>\r\n\r\n\r\n  <p>\r\n    <a href=\"https://profile-ydgl.onrender.com/\" target=\"_blank\"> Access Lab </a>\r\n  </p>\r\n\r\n  <div style=\"margin-top: 20px; padding: 10px 14px; border-radius: 8px;\r\n            background: rgba(20, 20, 30, 0.85);\r\n            border: 1px solid rgba(0, 150, 255, 0.3);\r\n            width: fit-content; font-size: 13px; color: #cfd8dc;\r\n            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\">\r\n  <p style=\"margin: 0;\">\r\n    <span style=\"color: #64b5f6;\">\u2726 Author:</span>\r\n    <span style=\"font-weight: 600; color: #90caf9;\">0verlo0ked</span>\r\n  </p>\r\n</div>\r\n\r\n</body>\r\n</html>\r\n\r\n\r\n\r\n",
+    "category": "Web",
+    "base_score": 200,
+    "difficulty": "Medium",
+    "visible": true,
+    "solves": 0,
+    "requires": [],
+    "hints": [],
+    "flags": [
+      {
+        "id": "7a1d9b2c-7469-49d8-b791-354ae57321d7",
+        "type": "static",
+        "flag": "ICTAK{idor_real_and_ripe}"
+      }
+    ],
+    "files": []
+  },
+  {
+    "id": "web7",
+    "title": "LOST SSRF ",
+    "description": "<!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n  <meta charset=\"UTF-8\">\r\n \r\n</head>\r\n<body style=\"font-family: Arial, sans-serif; line-height: 1.6; margin: 40px;\">\r\n\r\n \r\n\r\n  <p>\r\n\r\n    Your goal: retrieve the administrator-only secret stored on the internal debug service at /internal/flag . The secret is accessible from the server but is normally not reachable from the outside. The internal service is running on a port _000.\r\n</p>\r\n\r\n  <p><strong>Flag format:</strong> ICTAK{anything_here_xxxxxxx}</p>\r\n\r\n\r\n  <p>\r\n    <a href=\"https://ssrf-hokg.onrender.com/\" target=\"_blank\"> Access Lab </a>\r\n  </p>\r\n\r\n  <div style=\"margin-top: 20px; padding: 10px 14px; border-radius: 8px;\r\n            background: rgba(20, 20, 30, 0.85);\r\n            border: 1px solid rgba(0, 150, 255, 0.3);\r\n            width: fit-content; font-size: 13px; color: #cfd8dc;\r\n            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\">\r\n  <p style=\"margin: 0;\">\r\n    <span style=\"color: #64b5f6;\">\u2726 Author:</span>\r\n    <span style=\"font-weight: 600; color: #90caf9;\">0verlo0ked</span>\r\n  </p>\r\n</div>\r\n\r\n</body>\r\n</html>\r\n\r\n\r\n\r\n",
+    "category": "Web",
+    "base_score": 300,
+    "difficulty": "Easy",
+    "visible": true,
+    "solves": 0,
+    "requires": [],
+    "hints": [],
+    "flags": [
+      {
+        "id": "cfda084e-825d-419b-9b43-188d4628e1eb",
+        "type": "static",
+        "flag": "ICTAK{ssrf_decimal_wrap}"
       }
     ],
     "files": []
